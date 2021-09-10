@@ -85,7 +85,7 @@ body {
 .msj-container, .msj2-container {
     display: none;
     width: 20rem;
-    margin: 0.5rem;
+    margin: 0.5rem 0;
     padding: 1rem;
     margin-right: auto;
     margin-left: auto;
