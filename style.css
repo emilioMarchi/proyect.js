@@ -1,0 +1,146 @@
+.flex {
+    display: flex;
+}
+
+body {
+
+    background-image: url(images//store-img.png);
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: center;
+}
+
+.section-home {
+    padding: 2%; 
+    height: 100vh;
+}
+.title {
+    padding-bottom: 1rem;
+}
+.title h1 {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+}
+.info-h5 h5 {
+    margin: 0.5rem;
+}
+
+
+.panel-button-add button {
+    width: 10rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: rgb(141, 77, 77);
+}
+
+
+
+
+.section-products {
+    display: none;
+}
+.admin-products-container {
+    display: flex;
+    justify-content: space-between;
+}
+.title-form {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.form-content {
+    width: 30%;
+    margin: 2rem;
+}
+.products-container {
+    width: 70%;;
+    margin: 2rem;
+}
+.title-list {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.products-list {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(199, 202, 202);
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+
+.nav-card {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
+.title-products{
+    text-align: center;
+    padding: 3rem;
+}
+.title-products button {
+    margin: 2rem;
+    border: 0.5rem;
+}
+.msj-container, .msj2-container {
+    display: none;
+    width: 20rem;
+    margin: 0.5rem;
+    padding: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: green;
+    border-radius: 1rem;
+    color: honeydew;
+}
+.msj-container h3, .msj2-container h3 {
+    color: rgb(247, 244, 240);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 1;
+    text-align: center;
+}
+.msj2-container {
+    background-color: rgb(202, 10, 10);
+}
+.product-card {
+    display: flex;
+    flex-direction: column;
+    
+    width: 30%;
+    height: 15rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    background-color: rgb(37, 34, 37);
+    border-radius: 1rem;
+    color: white;
+    word-wrap: break-word;
+}
+.body-card{
+    height: 65%;
+}
+.body-card h3, .footer-card h3{
+    font-weight: 500;
+    font-size: 1.3rem;
+
+}
+.body-card h4{
+    font-weight: 300;
+    font-size: 1rem;
+}
+.footer-card {
+    align-items: flex-end;
+}
+.button-content {
+    width: 10%;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-form {
+    padding: 1rem 2rem;
+}
+.btn-content .btn-new-product {
+    padding: 1rem;
+    border-radius: 1rem;
+}
