@@ -92,8 +92,14 @@ class UI {
                                                         </div>
                                                     </div>`);
     }
+    addProductPage = () => {
+        $('.section-home').fadeOut(500);
+        $('.section-products').fadeIn(500);
+    }
 }
+const formReset = () => {
 
+}
 const storesList = [];
 const l = storesList.length; 
 //  Aca se inicia la app 
@@ -101,14 +107,29 @@ const l = storesList.length;
 let store = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
 storesList.push(store);
 
-const generateAddProductPage = () => {
-    $('.section-home').fadeOut(500);
-    $('.section-products').fadeIn(500);
-    $('.form').submit((e) => {
-        storesList[l].addProduct();
+$('.btn-add').on('click', () => {
+    const ui = new UI();
+    ui.addProductPage();
+});
+$(".btn-form").click((e) => {
+    const state = checkForm();
+
+    if(state){
+        storesList[0].addProduct();
+        $("#form")[0].reset();
         e.preventDefault();
-    });
+    } else {storesList[0].addProduct();}
+});
+const checkForm = () => {
+            
+            let state = false;
+            let productName = $('#product-name').val();
+            let productDescription = $('#product-description').val();
+            let productPrice = parseFloat($('#product-price').val());
+            let productCategory = $('.form-select').val();
+
+            if(productName && productDescription && productPrice && productCategory) {
+                state = true;
+            } else {}
+            return state;
 }
-$('.btn-add').click(generateAddProductPage);
-
-
