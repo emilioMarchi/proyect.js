@@ -26,7 +26,7 @@ class StoreUser {
                 this.postProductsStorage();
 
                 let ui = new UI();
-                ui.addCardProduct(p, productName,productDescription,productPrice);
+                ui.addCardProduct(p, productName, productDescription, productPrice);
 
                 $('.msj-container').slideDown(500)
                 .delay(1000)
@@ -101,7 +101,7 @@ class ProductStore {
     
 }
 class UI {
-    addCardProduct(i,n,d,p) {
+    addCardProduct = (i,n,d,p) => {
         $('.products-list').prepend(`<div class="product-card col-md-4 row-md-1">
                                                         <div class="nav-card">
                                                             <i id='delete-product' class="fas fa-trash-alt"></i>
@@ -117,33 +117,44 @@ class UI {
                                                         </div>
                                                     </div>`);
     }
-    addProductPage = () => {
+    renderAddProductPage = () => {
         $('.section-home').fadeOut(500);
         $('.section-products').fadeIn(500);
+        this.renderProductsList;
+    }
+    renderProductsList = () => {
+        const products = storesList[l].products;
+
+        for (const p of products) {
+            this.addCardProduct(p.id, p.name, p.description, p.price);
+        }
     }
 }
-const formReset = () => {
 
-}
+//  Aca se inicia la app 
 const storesList = [];
 const l = storesList.length; 
-//  Aca se inicia la app 
 
 let store = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
 storesList.push(store);
 
+storesList[0].getProductsJson();
+// evento renderProductList sobre btn agregar producto
 $('.btn-add').on('click', () => {
     const ui = new UI();
-    ui.addProductPage();
+    ui.renderAddProductPage();
+    ui.renderProductsList();
 });
+
+// evento agregar producto sobre formulario
 $(".btn-form").click((e) => {
     const state = checkForm();
-    e.preventDefault();
-
+    
     if(state){
         storesList[0].addProduct();
         $("#form")[0].reset();
     } else {storesList[0].addProduct();}
+    e.preventDefault();
 });
 const checkForm = () => {
             

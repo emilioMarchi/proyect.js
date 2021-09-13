@@ -1,26 +1,26 @@
 [
     {
         "id":0,
-        "name":"Porduct",
-        "description":"descripcion de producto",
-        "price":99999,"category":"pantalon"
+        "name":"Chaqueta negra",
+        "description":"Chaqueta de cuero",
+        "price":4690.50,"category":"chaqueta"
     },
     {
         "id":1,
-        "name":"Porduct",
-        "description":"descripcion de producto",
-        "price":99999,"category":"chaqueta"
+        "name":"Pantalon de jean",
+        "description":"Pantalos de jean Levis",
+        "price":3500.20,"category":"Pantalon"
     },
     {
         "id":2,
-        "name":"Porduct",
-        "description":"descripcion de producto",
-        "price":99999,"category":"remera"
+        "name":"Camiseta nike",
+        "description":"camniseta deportiva nike",
+        "price":4650.50,"category":"remera"
     },
     {
         "id":3,
-        "name":"Porduct",
-        "description":"descripcion de producto",
-        "price":99999,"category":"pantalon"
+        "name":"Pantalon de buzo",
+        "description":"Pantalon de buzo negro",
+        "price":4460.50,"category":"pantalon"
     }
 ]
