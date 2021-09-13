@@ -113,11 +113,11 @@ $('.btn-add').on('click', () => {
 });
 $(".btn-form").click((e) => {
     const state = checkForm();
+    e.preventDefault();
 
     if(state){
         storesList[0].addProduct();
         $("#form")[0].reset();
-        e.preventDefault();
     } else {storesList[0].addProduct();}
 });
 const checkForm = () => {
