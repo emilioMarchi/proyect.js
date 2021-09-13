@@ -124,38 +124,40 @@ class UI {
     }
     renderProductsList = () => {
         const products = storesList[l].products;
-
+        
         for (const p of products) {
             this.addCardProduct(p.id, p.name, p.description, p.price);
         }
     }
 }
-
-//  Aca se inicia la app 
 const storesList = [];
 const l = storesList.length; 
 
-let store = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
-storesList.push(store);
-
-storesList[0].getProductsJson();
-// evento renderProductList sobre btn agregar producto
-$('.btn-add').on('click', () => {
-    const ui = new UI();
-    ui.renderAddProductPage();
-    ui.renderProductsList();
-});
-
-// evento agregar producto sobre formulario
-$(".btn-form").click((e) => {
-    const state = checkForm();
+//  Aca se inicia la app 
+$(document).ready(() => {
+    let store = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
+    storesList.push(store);
     
-    if(state){
-        storesList[0].addProduct();
-        $("#form")[0].reset();
-    } else {storesList[0].addProduct();}
-    e.preventDefault();
-});
+    storesList[0].getProductsJson();
+    // evento renderProductList sobre btn agregar producto
+    $('.btn-add').on('click', () => {
+        const ui = new UI();
+        ui.renderAddProductPage();
+        ui.renderProductsList();
+    });
+    
+    // evento agregar producto sobre formulario
+    $(".btn-form").click((e) => {
+        const state = checkForm();
+        
+        if(state){
+            storesList[0].addProduct();
+            $("#form")[0].reset();
+        } else {storesList[0].addProduct();}
+        e.preventDefault();
+    });
+})
+
 const checkForm = () => {
             
             let state = false;
