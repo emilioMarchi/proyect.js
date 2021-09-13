@@ -42,7 +42,7 @@ class StoreUser {
             })
         }
     }
-    // llamar a storeList[0].filterProduct()
+    // funcion para filtrar productos (en desarrollo)
     filterProduct = () => {
         
         let listProducts = [];
@@ -62,7 +62,7 @@ class StoreUser {
         let p = JSON.parse(localStorage.getItem('products'));
         console.log(p);
     }
-        // funcion para enviar datos a archo json
+        // funcion para enviar datos a archivo json (en desarrollo)
     postProductsJson = () => {
         const URLJSON = "json/products.json";
         const data = JSON.stringify(this.products);
@@ -157,15 +157,14 @@ $(document).ready(() => {
         e.preventDefault();
     });
 })
-
-const checkForm = () => {
-            
+// funcion para validar formulario
+const checkForm = () => {     
             let state = false;
             let productName = $('#product-name').val();
             let productDescription = $('#product-description').val();
             let productPrice = parseFloat($('#product-price').val());
             let productCategory = $('.form-select').val();
-
+            // todavia no pude solucionar validar que llegue el valor de productCatergory
             if(productName && productDescription && productPrice && productCategory) {
                 state = true;
             } else {}
