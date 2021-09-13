@@ -1,0 +1,26 @@
+[
+    {
+        "id":0,
+        "name":"Porduct",
+        "description":"descripcion de producto",
+        "price":99999,"category":"pantalon"
+    },
+    {
+        "id":1,
+        "name":"Porduct",
+        "description":"descripcion de producto",
+        "price":99999,"category":"chaqueta"
+    },
+    {
+        "id":2,
+        "name":"Porduct",
+        "description":"descripcion de producto",
+        "price":99999,"category":"remera"
+    },
+    {
+        "id":3,
+        "name":"Porduct",
+        "description":"descripcion de producto",
+        "price":99999,"category":"pantalon"
+    }
+]

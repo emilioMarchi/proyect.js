@@ -55,13 +55,38 @@ class StoreUser {
         }
     }
     postProductsStorage = () => {
-        let p = this.products;
-        localStorage.setItem('products', JSON.stringify(p));
+        let productsJson = JSON.stringify(this.products);
+        localStorage.setItem('products', productsJson);
     }
     getProductsStorage = () => {
         let p = JSON.parse(localStorage.getItem('products'));
         console.log(p);
     }
+        // funcion para enviar datos a archo json
+    postProductsJson = () => {
+        const URLJSON = "json/products.json";
+        const data = JSON.stringify(this.products);
+
+        $.post(URLJSON, data, (respuesta, estado) => {
+            if(estado === 'success') {
+                console.log(respuesta);
+            }
+        }, 'json');
+    }
+    // funcion para traer datos del archivo json
+    getProductsJson = () => {
+        const URLJSON = "json/products.json";
+        
+        $.getJSON(URLJSON, (respuesta, estado) => {
+            if (estado === 'success') {
+                let data = respuesta;
+                this.products = data;
+                console.log(data)
+            }
+        })
+    }
+
+    
 }
 
 class ProductStore {
