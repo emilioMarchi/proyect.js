@@ -59,8 +59,11 @@ class StoreUser {
         localStorage.setItem('products', productsJson);
     }
     getProductsStorage = () => {
-        let p = JSON.parse(localStorage.getItem('products'));
-        console.log(p);
+        let products = JSON.parse(localStorage.getItem('products'));
+        for (const p of products){
+            this.products.push(p);
+        }
+        storesList[l].postProductsStorage();
     }
         // funcion para enviar datos a archivo json (en desarrollo)
     postProductsJson = () => {
@@ -80,11 +83,18 @@ class StoreUser {
         $.getJSON(URLJSON, (respuesta, estado) => {
             if (estado === 'success') {
                 let data = respuesta;
-                this.products = data;
-                console.log(data)
+                const getProductsJsonToProductList = (data) => {
+
+                    for (const d of data) {
+                        storesList[l].products.push(d);
+                    }
+                }
+                getProductsJsonToProductList(data);
+                this.postProductsStorage();
             }
         })
     }
+    
 
     
 }
@@ -100,6 +110,7 @@ class ProductStore {
 
     
 }
+
 class UI {
     addCardProduct = (i,n,d,p) => {
         $('.products-list').prepend(`<div class="product-card col-md-4 row-md-1">
@@ -117,10 +128,21 @@ class UI {
                                                         </div>
                                                     </div>`);
     }
+    renderHomePage = () => {
+        $('.section-home').show();
+        $('.section-products').hide();
+    }
     renderAddProductPage = () => {
-        $('.section-home').fadeOut(500);
-        $('.section-products').fadeIn(500);
+        $('.section-home').hide();
+        $('.section-contable').hide();
+        $('.section-products').show();
+        $('.products-list').empty();
         this.renderProductsList;
+    }
+    renderContablePage = () => {
+        $('.section-home').hide();
+        $('.section-products').hide();
+        $('.section-contable').show();
     }
     renderProductsList = () => {
         const products = storesList[l].products;
@@ -135,12 +157,22 @@ const l = storesList.length;
 
 //  Aca se inicia la app 
 $(document).ready(() => {
+    
     let store = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
     storesList.push(store);
-    
-    storesList[0].getProductsJson();
+    storesList[l].getProductsJson();
+
+    $('.contable-link').click(() => {
+        const ui = new UI();
+        ui.renderContablePage();
+    })
+    $('.home-link').click(() => {
+        const ui = new UI();
+        ui.renderHomePage();
+    })
+
     // evento renderProductList sobre btn agregar producto
-    $('.btn-add').on('click', () => {
+    $('.product-link').on('click', () => {
         const ui = new UI();
         ui.renderAddProductPage();
         ui.renderProductsList();

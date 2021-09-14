@@ -9,7 +9,8 @@
         "id":1,
         "name":"Pantalon de jean",
         "description":"Pantalos de jean Levis",
-        "price":3500.20,"category":"Pantalon"
+        "price":3500.20,
+        "category":"pantalon"
     },
     {
         "id":2,
