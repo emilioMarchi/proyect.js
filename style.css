@@ -3,11 +3,8 @@
 }
 
 body {
-
-    background-image: url(images//store-img.png);
-    background-repeat: no-repeat;
-    background-size:contain;
-    background-position: center;
+    padding: 0;
+    margin: 0;
 }
 
 .section-home {
@@ -38,7 +35,8 @@ body {
 
 
 .section-products {
-    display: none;
+    display: block;
+    padding: 2%;
 }
 
 .admin-products-container {
@@ -72,6 +70,7 @@ body {
 .section-contable {
     display: none;
     height: 100vh;
+    padding: 2%;
 }
 .section-contable table {
     width: 80%;
@@ -95,11 +94,8 @@ body {
 }
 .msj-container, .msj2-container {
     display: none;
-    width: 20rem;
-    margin: 0.5rem 0;
+    width: 100%;
     padding: 1rem;
-    margin-right: auto;
-    margin-left: auto;
     background-color: green;
     border-radius: 1rem;
     color: honeydew;

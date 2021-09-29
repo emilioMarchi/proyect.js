@@ -1,4 +1,3 @@
-
 class StoreUser {
     constructor(id, n, e, p) {
         this.id = id;
@@ -11,36 +10,32 @@ class StoreUser {
             dir: '',
         }
         
-        this.addProduct = () => {
+    }
+    addProduct = () => {
+    
+        let productName = $('#product-name').val();
+        let productDescription = $('#product-description').val();
+        let productPrice = parseFloat($('#product-price').val());
+        let productCategory = $('.form-select').val();
+        let p = storesList[l].products.length;
         
-            let productName = $('#product-name').val();
-            let productDescription = $('#product-description').val();
-            let productPrice = parseFloat($('#product-price').val());
-            let productCategory = $('.form-select').val();
-            let p = storesList[l].products.length;
-            
-            if(productName && productDescription && productPrice && productCategory) {
-                let product = new ProductStore (p, productName, productDescription, productPrice, productCategory);
-                storesList[l].products.push(product);
-                localStorage.setItem('products', product);
-                this.postProductsStorage();
+        
+        if(productName && productDescription && productPrice && productCategory) {
+            let product = new ProductStore (p, productName, productDescription, productPrice, productCategory);
+            storesList[l].products.push(product);
+            localStorage.setItem('products', product);
+            this.postProductsStorage();
 
-                let ui = new UI();
-                ui.addCardProduct(p, productName, productDescription, productPrice);
+            let ui = new UI();
+            ui.addCardProduct(p, productName, productDescription, productPrice);
 
-                $('.msj-container').slideDown(500)
-                .delay(1000)
-                .fadeOut(500);
-                
-            } else {$('.msj2-container').slideDown(500)
+            $('.msj-container').slideDown(500)
             .delay(1000)
-            .fadeOut(500);}
-
-            // Aca iria la funcion para eliminar el producto y el elemento del dom que dispara el evento
-            $('#delete-product').click((e) => {
-                console.log(e.target.parentNode.parentNode);
-            })
-        }
+            .fadeOut(500);
+            
+        } else {$('.msj2-container').slideDown(500)
+        .delay(1000)
+        .fadeOut(500);}
     }
     // funcion para filtrar productos (en desarrollo)
     filterProduct = () => {
@@ -60,22 +55,9 @@ class StoreUser {
     }
     getProductsStorage = () => {
         let products = JSON.parse(localStorage.getItem('products'));
-        for (const p of products){
-            this.products.push(p);
-        }
-        storesList[l].postProductsStorage();
+        return products;
     }
-        // funcion para enviar datos a archivo json (en desarrollo)
-    postProductsJson = () => {
-        const URLJSON = "json/products.json";
-        const data = JSON.stringify(this.products);
 
-        $.post(URLJSON, data, (respuesta, estado) => {
-            if(estado === 'success') {
-                console.log(respuesta);
-            }
-        }, 'json');
-    }
     // funcion para traer datos del archivo json
     getProductsJson = () => {
         const URLJSON = "json/products.json";
@@ -93,10 +75,7 @@ class StoreUser {
                 this.postProductsStorage();
             }
         })
-    }
-    
-
-    
+    }    
 }
 
 class ProductStore {
@@ -107,16 +86,14 @@ class ProductStore {
         this.price = p;
         this.category = c;
     }
-
-    
 }
 
 class UI {
     addCardProduct = (i,n,d,p) => {
-        $('.products-list').prepend(`<div class="product-card col-md-4 row-md-1">
+        $('.products-list').prepend(`<div id='${i}' class="product-card col-md-4 row-md-1">
                                                         <div class="nav-card">
-                                                            <i id='delete-product' class="fas fa-trash-alt"></i>
-                                                            <i id='edit-product' class="fas fa-pencil-alt"></i>
+                                                            <i id="delete-product" class="fas fa-trash-alt"></i>
+                                                            <i class="fas fa-pencil-alt"></i>
                                                         </div>
                                                         <div class="body-card">
                                                             <h4>ID:${i}</h4>
@@ -130,64 +107,43 @@ class UI {
     }
     renderHomePage = () => {
         $('.section-home').show();
+        $('.section-contable').hide();
         $('.section-products').hide();
     }
     renderAddProductPage = () => {
+        $('.section-products').show();
         $('.section-home').hide();
         $('.section-contable').hide();
-        $('.section-products').show();
         $('.products-list').empty();
         this.renderProductsList;
     }
     renderContablePage = () => {
+        $('.section-contable').show();
         $('.section-home').hide();
         $('.section-products').hide();
-        $('.section-contable').show();
     }
-    renderProductsList = () => {
-        const products = storesList[l].products;
-        
-        for (const p of products) {
-            this.addCardProduct(p.id, p.name, p.description, p.price);
+    renderProductsList = (p) => {
+        for(let i = 0; i < p.length; i++) {
+            const x = p[i];
+            const id = x.id;
+            const n = x.name;
+            const d = x.description;
+            const price = x.price;
+
+            this.addCardProduct(id, n, d, price);  
         }
     }
 }
-const storesList = [];
-const l = storesList.length; 
 
 //  Aca se inicia la app 
+const storesList = [];
+const l = storesList.length; 
 $(document).ready(() => {
     
     let store = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
     storesList.push(store);
     storesList[l].getProductsJson();
 
-    $('.contable-link').click(() => {
-        const ui = new UI();
-        ui.renderContablePage();
-    })
-    $('.home-link').click(() => {
-        const ui = new UI();
-        ui.renderHomePage();
-    })
-
-    // evento renderProductList sobre btn agregar producto
-    $('.product-link').on('click', () => {
-        const ui = new UI();
-        ui.renderAddProductPage();
-        ui.renderProductsList();
-    });
-    
-    // evento agregar producto sobre formulario
-    $(".btn-form").click((e) => {
-        const state = checkForm();
-        
-        if(state){
-            storesList[0].addProduct();
-            $("#form")[0].reset();
-        } else {storesList[0].addProduct();}
-        e.preventDefault();
-    });
 })
 // funcion para validar formulario
 const checkForm = () => {     
@@ -202,3 +158,13 @@ const checkForm = () => {
             } else {}
             return state;
 }
+const deleteProduct = (i) => {
+    
+}
+const getDate = () => {
+    const date = new Date();
+    const dateInfo = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}hs`;
+    
+}
+
+export {storesList, UI, checkForm};
