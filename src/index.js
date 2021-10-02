@@ -141,13 +141,10 @@ const checkForm = () => {
             } else {}
             return state;
 }
-const deleteProduct = (i) => {
-    
-}
 const getDate = () => {
     const date = new Date();
     const dateInfo = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}hs`;
     
 }
-
-export {storesList, UI, checkForm};
+console.log('holis')
+export default {storesList, UI, checkForm};
