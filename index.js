@@ -17,12 +17,12 @@ class StoreUser {
         let productDescription = $('#product-description').val();
         let productPrice = parseFloat($('#product-price').val());
         let productCategory = $('.form-select').val();
-        let p = storesList[l].products.length;
+        let p = storesList[0].products.length;
         
         
         if(productName && productDescription && productPrice && productCategory) {
             let product = new ProductStore (p, productName, productDescription, productPrice, productCategory);
-            storesList[l].products.push(product);
+            storesList[0].products.push(product);
             localStorage.setItem('products', product);
             this.postProductsStorage();
 
@@ -41,7 +41,7 @@ class StoreUser {
     filterProduct = () => {
         
         let listProducts = [];
-        listProducts.push(storesList[l].products.filter( prod => prod.price <= 10 ));
+        listProducts.push(storesList[0].products.filter( prod => prod.price <= 10 ));
         
         console.log('A continuacion los productos filtrados');
         
@@ -68,7 +68,7 @@ class StoreUser {
                 const getProductsJsonToProductList = (data) => {
 
                     for (const d of data) {
-                        storesList[l].products.push(d);
+                        storesList[0].products.push(d);
                     }
                 }
                 getProductsJsonToProductList(data);
@@ -91,9 +91,8 @@ class ProductStore {
 class UI {
     addCardProduct = (i,n,d,p) => {
         $('.products-list').prepend(`<div id='${i}' class="product-card col-md-4 row-md-1">
-                                                        <div class="nav-card">
-                                                            <i id="delete-product" class="fas fa-trash-alt"></i>
-                                                            <i class="fas fa-pencil-alt"></i>
+                                                        <div class='nav-card'>
+                                                            <i class="delete far fa-trash-alt"></i>
                                                         </div>
                                                         <div class="body-card">
                                                             <h4>ID:${i}</h4>
@@ -105,23 +104,7 @@ class UI {
                                                         </div>
                                                     </div>`);
     }
-    renderHomePage = () => {
-        $('.section-home').show();
-        $('.section-contable').hide();
-        $('.section-products').hide();
-    }
-    renderAddProductPage = () => {
-        $('.section-products').show();
-        $('.section-home').hide();
-        $('.section-contable').hide();
-        $('.products-list').empty();
-        this.renderProductsList;
-    }
-    renderContablePage = () => {
-        $('.section-contable').show();
-        $('.section-home').hide();
-        $('.section-products').hide();
-    }
+    
     renderProductsList = (p) => {
         for(let i = 0; i < p.length; i++) {
             const x = p[i];
@@ -136,15 +119,15 @@ class UI {
 }
 
 //  Aca se inicia la app 
-const storesList = [];
-const l = storesList.length; 
-$(document).ready(() => {
-    
-    let store = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
-    storesList.push(store);
-    storesList[l].getProductsJson();
 
-})
+    const storesList = [];
+    const newStore = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
+    storesList.push(newStore);
+
+    storesList[0].getProductsJson();
+
+
+
 // funcion para validar formulario
 const checkForm = () => {     
             let state = false;
