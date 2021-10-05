@@ -23,8 +23,9 @@ class StoreUser {
         if(productName && productDescription && productPrice && productCategory) {
             let product = new ProductStore (p, productName, productDescription, productPrice, productCategory);
             storesList[0].products.push(product);
-            localStorage.setItem('products', product);
-            this.postProductsStorage();
+
+            newProducts.push(product);
+            this.getNewProducts(newProducts);
 
             let ui = new UI();
             ui.addCardProduct(p, productName, productDescription, productPrice);
@@ -60,14 +61,14 @@ class StoreUser {
 
     // funcion para traer datos del archivo json
     getProductsJson = () => {
-        const URLJSON = "json/products.json";
+        const URLJSON = '/json/products.json';
         
         $.getJSON(URLJSON, (respuesta, estado) => {
             if (estado === 'success') {
                 let data = respuesta;
-                const getProductsJsonToProductList = (data) => {
+                const getProductsJsonToProductList = (i) => {
 
-                    for (const d of data) {
+                    for (const d of i) {
                         storesList[0].products.push(d);
                     }
                 }
@@ -119,12 +120,13 @@ class UI {
 }
 
 //  Aca se inicia la app 
-
     const storesList = [];
     const newStore = new StoreUser(0, 'Tienda', 'email@tienda.com', 'contraseña');
     storesList.push(newStore);
 
     storesList[0].getProductsJson();
+
+    const newProducts = []
 
 
 
@@ -146,5 +148,4 @@ const getDate = () => {
     const dateInfo = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}, ${date.getHours()}:${date.getMinutes()}hs`;
     
 }
-console.log('holis')
-export default {storesList, UI, checkForm};
+export {storesList, UI, checkForm};

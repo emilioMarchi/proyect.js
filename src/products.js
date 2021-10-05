@@ -2,6 +2,7 @@ import {storesList, UI, checkForm} from './index.js';
 
 const ui = new UI();
 const p = storesList[0].getProductsStorage();
+console.log(p)
 ui.renderProductsList(p);
 
 
